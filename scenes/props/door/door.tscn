@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dky0upv40sn83"]
+
+[ext_resource type="Script" path="res://scenes/props/door/door.gd" id="1_c4nww"]
+[ext_resource type="ArrayMesh" uid="uid://bp7pid3cdvwav" path="res://scenes/props/door/frame.res" id="1_vv243"]
+[ext_resource type="ArrayMesh" uid="uid://btv3m2bilby6a" path="res://scenes/props/door/door.res" id="2_jttlq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0org5"]
+size = Vector3(0.193604, 2.5, 1.5)
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_c4nww")
+
+[node name="Frame" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_vv243")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="Door" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = ExtResource("2_jttlq")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.65)
+shape = SubResource("BoxShape3D_0org5")

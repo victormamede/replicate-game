@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bq8jmfwfxcmtn"]
+
+[ext_resource type="Script" path="res://scenes/actors/player/player.gd" id="1_74re3"]
+[ext_resource type="Script" path="res://scenes/actors/player/interactor.gd" id="2_s65fm"]
+[ext_resource type="Script" path="res://scenes/actors/actor.gd" id="3_fdxbv"]
+[ext_resource type="PackedScene" uid="uid://bae23omobtkfm" path="res://scenes/actors/player/hud.tscn" id="3_ku3ve"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gpnwa"]
+radius = 0.25
+height = 1.8
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_74re3")
+
+[node name="HUD" parent="." instance=ExtResource("3_ku3ve")]
+
+[node name="Actor" type="CharacterBody3D" parent="."]
+script = ExtResource("3_fdxbv")
+speed = 2.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Actor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_gpnwa")
+
+[node name="Forward" type="Node3D" parent="Actor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Interactor" type="RayCast3D" parent="Actor/Forward"]
+target_position = Vector3(0, 0, -2)
+collision_mask = 17
+collide_with_areas = true
+debug_shape_custom_color = Color(0.263889, 0.571482, 0.524427, 1)
+debug_shape_thickness = 1
+script = ExtResource("2_s65fm")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Actor/Forward"]
+transform = Transform3D(0.992546, 0.00531586, 0.121753, 0, 0.999048, -0.0436194, -0.121869, 0.0432943, 0.991602, 0.295077, 0, 0.424138)
+shadow_enabled = true
+spot_range = 16.9422
+spot_angle = 30.7706
+
+[node name="Camera3D" type="Camera3D" parent="Actor/Forward"]
+current = true
+fov = 90.0
+
+[connection signal="interactable_focused" from="Actor/Forward/Interactor" to="HUD" method="_on_interactor_interactable_focused"]
+[connection signal="interactable_unfocused" from="Actor/Forward/Interactor" to="HUD" method="_on_interactor_interactable_unfocused"]

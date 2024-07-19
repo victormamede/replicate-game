@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfm5by3tgl2fj"]
+
+[ext_resource type="Script" path="res://scenes/props/lamp.gd" id="1_1ndht"]
+[ext_resource type="PackedScene" uid="uid://1f0lvqoniu8m" path="res://assets/models/objects/lamp.blend" id="2_anrjr"]
+
+[node name="Lamp" type="OmniLight3D"]
+shadow_enabled = true
+shadow_reverse_cull_face = true
+omni_range = 8.58998
+script = ExtResource("1_1ndht")
+
+[node name="Model" parent="." instance=ExtResource("2_anrjr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.087858, 0)

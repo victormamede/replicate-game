@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqkg0hw7pxkml"]
+
+[ext_resource type="Script" path="res://scenes/interactables/door/door.gd" id="1_evkh7"]
+[ext_resource type="PackedScene" uid="uid://cpsuea1n3ken4" path="res://scenes/interactables/interactable.tscn" id="2_oyvqk"]
+[ext_resource type="PackedScene" uid="uid://dky0upv40sn83" path="res://scenes/props/door/door.tscn" id="3_x244a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m8rxw"]
+size = Vector3(0.4, 2, 1)
+
+[node name="InteractableDoor" type="Node3D"]
+script = ExtResource("1_evkh7")
+
+[node name="Door" parent="." instance=ExtResource("3_x244a")]
+
+[node name="Interactable" parent="Door/StaticBody3D" index="2" instance=ExtResource("2_oyvqk")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/StaticBody3D/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -0.65)
+shape = SubResource("BoxShape3D_m8rxw")
+
+[connection signal="interacted" from="Door/StaticBody3D/Interactable" to="." method="_on_interactable_interacted"]
+
+[editable path="Door"]

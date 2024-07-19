@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bae23omobtkfm"]
+
+[ext_resource type="Texture2D" uid="uid://c76y3pyapoj40" path="res://assets/icons/crosshair.png" id="1_evl25"]
+[ext_resource type="Script" path="res://scenes/actors/player/hud.gd" id="1_xbhwb"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_xbhwb")
+
+[node name="Crosshair" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_evl25")
